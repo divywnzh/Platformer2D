@@ -1,4 +1,7 @@
 package main;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+
 import javax.swing.JFrame;
 
 public class GameWindow {
@@ -15,5 +18,21 @@ public class GameWindow {
 		jframe.pack();//look at the component -> make the window big enough to fit that
 		
 		jframe.setVisible(true);
+		jframe.addWindowFocusListener(new WindowFocusListener() {
+			
+			@Override
+			public void windowLostFocus(WindowEvent e) {
+				//handling changing windows for keyboard inputs etc
+				gamePanel.getGame().windowFocusLost();
+				System.out.println(" Lost Focus ");
+				
+			}
+			
+			@Override
+			public void windowGainedFocus(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 }
