@@ -4,10 +4,9 @@ import static utilz.Constants.Directions.DOWN;
 import static utilz.Constants.Directions.LEFT;
 import static utilz.Constants.Directions.RIGHT;
 import static utilz.Constants.Directions.UP;
-import static utilz.Constants.PlayerConstants.GetSpriteAmount;
-import static utilz.Constants.PlayerConstants.IDLE;
-import static utilz.Constants.PlayerConstants.RUNNING;
-import static utilz.Constants.PlayerConstants.ATTACK_1;
+import static utilz.Constants.PlayerConstants.*;
+import static utilz.HelpMethods.CanMoveHere;
+import static utilz.LoadSave.GetSpriteAtlas;
 
 
 import java.awt.Graphics;
@@ -16,6 +15,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
+
+import main.Game;
+import utilz.LoadSave;
 
 public class Player extends Entity {
 	
@@ -27,10 +29,14 @@ public class Player extends Entity {
 	
 	private boolean left,up,right,down;
 	private float playerSpeed=2.0f;
+	private int[][] lvlData;
+	private float xDrawOffset=21*Game.SCALE;//calculated for new hitbox (packs in the player)
+	private float yDrawOffset=4*Game.SCALE;
 	
-	public Player(float x, float y) {
-		super(x, y);//calls the super class //think of it as shortcut -> no need to code as much
+	public Player(float x, float y, int width, int height) {
+		super(x, y, width, height);//calls the super class //think of it as shortcut -> no need to code as much
 		loadAnimations();
+		initHitbox(x,y,20*Game.SCALE,28*Game.SCALE);
 	}
 	
 	public void update() {
@@ -42,7 +48,8 @@ public class Player extends Entity {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(animations[playerAction][aniIndex], (int)x, (int)y, 256, 160, null);
+		g.drawImage(animations[playerAction][aniIndex], (int)(hitbox.x-xDrawOffset), (int)(hitbox.y-yDrawOffset), width, height, null);
+		drawHitbox(g);
 	}
 	
 
@@ -90,50 +97,55 @@ public class Player extends Entity {
 		
 		moving=false;
 		
-		if(left && !right) { //if either of A or D is pressed
-			x-=playerSpeed;
-			moving=true;
-		}else if (right && !left){
-			x+=playerSpeed;
+		if(!left && !right && !up && !down)
+			return;
+		
+		float xSpeed=0,ySpeed=0;
+		
+		if(left && !right)  //if either of A or D is pressed
+			xSpeed=-playerSpeed;
+		else if (right && !left)
+			xSpeed=playerSpeed;
+		
+		
+		if(up && !down) //if either of W or S is pressed
+			ySpeed=-playerSpeed;
+		else if (down && !up)
+			ySpeed+=playerSpeed;
+		
+//		if(CanMoveHere(x+xSpeed, y+ySpeed, width, height, lvlData)) {
+//			this.x+=xSpeed;
+//			this.y+=ySpeed;
+//			moving=true;
+//		}
+		
+		if(CanMoveHere(hitbox.x+xSpeed, hitbox.y+ySpeed, hitbox.width, hitbox.height, lvlData)) {
+			hitbox.x+=xSpeed;
+			hitbox.y+=ySpeed;
 			moving=true;
 		}
 		
-		if(up && !down) { //if either of W or S is pressed
-			y-=playerSpeed;
-			moving=true;
-		}else if (down && !up){
-			y+=playerSpeed;
-			moving=true;
-		}
 	
 	}
 	
 	private void loadAnimations() {
 		
-		InputStream is = getClass().getResourceAsStream("/player_sprites.png");
+		BufferedImage img=LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
+			
+		animations=new BufferedImage[9][6]; //9 rows, 6 columns
 		
-		try {
-			BufferedImage img=ImageIO.read(is);
-			
-			animations=new BufferedImage[9][6]; //9 rows, 6 columns
-			
-			for(int j=0;j<animations.length;j++) {
-				for(int i=0;i<animations[j].length;i++) {
-					animations[j][i]=img.getSubimage(i*64, j*40, 64, 40);
-				}
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				is.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+		for(int j=0;j<animations.length;j++) {
+			for(int i=0;i<animations[j].length;i++) {
+				animations[j][i]=img.getSubimage(i*64, j*40, 64, 40);
 			}
 		}
-		
+
 	}
+	
+	public void loadlvlData(int[][] lvlData) {
+		this.lvlData=lvlData;
+	}
+	
 	public void resetDirBooleans() {
 		left=false;
 		up=false;

@@ -39,6 +39,7 @@ public class KeyboardInputs implements KeyListener {
 //			gamePanel.getGame().getPlayer().setAttack(false);
 //			break;
 			
+//not using this -> if 'k' pressed quickly the attack animation won't even cover all 3 frames
 		}
 		
 	}

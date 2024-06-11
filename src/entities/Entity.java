@@ -1,10 +1,42 @@
 package entities;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
+
 public abstract class Entity { //class that you can not make object of used for extending (abstraction)
 	protected float x,y;//classes that extend Entity can now use protected terms
-	public Entity(float x, float y) {
+	protected int width,height;
+	protected Rectangle2D.Float hitbox;
+	
+	public Entity(float x, float y, int width, int height ) {
 		this.x=x;
 		this.y=y;
+		this.width = width;
+		this.height = height;
+		
+//		initHitbox();
+
+	}
+	
+	protected void drawHitbox(Graphics g) {
+		g.setColor(Color.PINK);
+		g.drawRect((int)hitbox.x, (int)hitbox.y, (int)hitbox.width, (int)hitbox.height);
+	}
+
+	protected void initHitbox(float x, float y, float width, float height) {//manually passed -> not using constructor's args
+		hitbox=new Rectangle2D.Float(x,y,width,height);
+		
+	}
+	
+//	public void updateHitbox() {
+//		hitbox.x=(int)x;
+//		hitbox.y=(int)y;
+//	}
+	
+	public Rectangle2D.Float getHitbox() {
+		return hitbox;
 	}
 
 }
