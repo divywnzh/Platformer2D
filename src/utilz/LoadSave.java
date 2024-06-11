@@ -15,6 +15,9 @@ public class LoadSave {// this class does not have any objects so we don't need 
 	public static final String PLAYER_ATLAS="player_sprites.png";
 	public static final String LEVEL_ATLAS="outside_sprites.png";
 	public static final String LEVEL_ONE_DATA="level_one_data.png";
+	
+	public static final int TILE_SOLID = 0;
+	public static final int TILE_SPACE_PRESENT = 1;  
 
 	public static BufferedImage GetSpriteAtlas(String file){ //we only need static methods
 		
@@ -45,7 +48,7 @@ public class LoadSave {// this class does not have any objects so we don't need 
 				Color color=new Color(img.getRGB(i, j));
 				int value=color.getRed();
 				if(value>=48)
-					value=0;
+					value=TILE_SOLID;
 				
 				lvlData[j][i]=value;
 			}	
