@@ -25,7 +25,7 @@ public abstract class Entity { //class that you can not make object of used for 
 		g.drawRect((int)hitbox.x, (int)hitbox.y, (int)hitbox.width, (int)hitbox.height);
 	}
 
-	protected void initHitbox(float x, float y, float width, float height) {//manually passed -> not using constructor's args
+	protected void initHitbox(float x, float y, int width, int height) {//manually passed -> not using constructor's args
 		hitbox=new Rectangle2D.Float(x,y,width,height);
 		
 	}

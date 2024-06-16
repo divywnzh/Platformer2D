@@ -18,7 +18,7 @@ public class Player extends Entity {
 	private int playerAction=IDLE;
 	private boolean moving=false, attack=false;
 	private boolean left,up,right,down,jump;
-	private float playerSpeed=2.0f;
+	private float playerSpeed=1.0f*Game.SCALE;
 	
 	private int[][] lvlData;
 	private float xDrawOffset=21*Game.SCALE;//calculated for new hitbox (packs in the player)
@@ -35,7 +35,7 @@ public class Player extends Entity {
 	public Player(float x, float y, int width, int height) {
 		super(x, y, width, height);//calls the super class //think of it as shortcut -> no need to code as much
 		loadAnimations();
-		initHitbox(x,y,20*Game.SCALE,27*Game.SCALE);
+		initHitbox(x,y,(int)(20*Game.SCALE),(int)(27*Game.SCALE));
 	}
 	
 	public void update() {

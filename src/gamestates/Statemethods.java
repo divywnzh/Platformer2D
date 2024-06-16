@@ -12,6 +12,7 @@ public interface Statemethods {//again using interfaces insure that both the Pla
 	
 	//inputs
 	public void mouseClicked(MouseEvent e);
+	public void mousePressed(MouseEvent e);
 	public void mouseReleased(MouseEvent e);
 	public void mouseMoved(MouseEvent e);
 	

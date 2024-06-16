@@ -50,16 +50,20 @@ public class Game implements Runnable{
 	public void update() {
 
 		//scene view -> Menu / Playing / ...
-		switch(Gamestate.state) {
+		switch (Gamestate.state) {
 		case MENU:
 			menu.update();
 			break;
 		case PLAYING:
 			playing.update();
 			break;
+		case OPTIONS:
+		case QUIT:
 		default:
+			System.out.println("Exiting game...");
+	        System.exit(0);
 			break;
-		
+
 		}
 	}
 	

@@ -43,6 +43,12 @@ public class Playing extends State implements Statemethods{//playing scene
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
@@ -117,5 +123,6 @@ public class Playing extends State implements Statemethods{//playing scene
 	public Player getPlayer() {
 		return player;
 	}
+
 
 }
