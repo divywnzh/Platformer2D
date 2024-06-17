@@ -7,11 +7,14 @@ import java.awt.event.MouseEvent;
 import entities.Player;
 import levels.LevelManager;
 import main.Game;
+import ui.PauseOverlay;
 
 public class Playing extends State implements Statemethods{//playing scene
 	
 	private Player player;
 	private LevelManager levelManager;
+	private PauseOverlay pauseOverlay;
+	private boolean paused=false;
 	
 	public Playing(Game game) {
 		super(game);
@@ -23,12 +26,18 @@ public class Playing extends State implements Statemethods{//playing scene
 		player = new Player(100, 100, (int)(64*Game.SCALE), (int)(40*Game.SCALE)); 
 		player.loadlvlData(levelManager.getCurrentLevel().getLevelData());
 		
+		pauseOverlay = new PauseOverlay(this);
 	}
 	
 	@Override
 	public void update() {
-		levelManager.update();
-		player.update();
+		
+		if(!paused) {
+			levelManager.update();
+			player.update();
+		} else {
+			pauseOverlay.update();
+		}
 		
 	}
 
@@ -36,6 +45,9 @@ public class Playing extends State implements Statemethods{//playing scene
 	public void draw(Graphics g) {
 		levelManager.draw(g);
 		player.render(g);	
+		
+		if(paused)
+			pauseOverlay.draw(g);;
 	}
 
 	@Override
@@ -46,20 +58,27 @@ public class Playing extends State implements Statemethods{//playing scene
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
+		if(paused)
+			pauseOverlay.mousePressed(e);
+			
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
+		if(paused)
+			pauseOverlay.mouseReleased(e);
+			
 		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
+		if(paused)
+			pauseOverlay.mouseMoved(e);
+			
 	}
 
 	@Override
@@ -86,7 +105,8 @@ public class Playing extends State implements Statemethods{//playing scene
 			
 		//switching state
 		case KeyEvent.VK_BACK_SPACE:
-			Gamestate.state=Gamestate.MENU;
+			paused=!paused;
+			break;
 			
 		}
 		
@@ -114,6 +134,11 @@ public class Playing extends State implements Statemethods{//playing scene
 //			break;
 			
 //not using this -> if 'k' pressed quickly the attack animation won't even cover all 3 frames
+	}
+	
+	public void unpauseGame() {
+		paused=false;
+		
 	}
 	
 	public void windowFocusLost() {
