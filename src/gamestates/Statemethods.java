@@ -18,6 +18,7 @@ public interface Statemethods {//again using interfaces insure that both the Pla
 	
 	public void keyPressed(KeyEvent e);
 	public void keyReleased(KeyEvent e);
+	void mouseDragged(MouseEvent e);
 	
 	
 }

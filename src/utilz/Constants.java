@@ -24,7 +24,7 @@ public class Constants {
 		}
 		public static class VolumeButtons{
 			public static final int VOLUME_DEFAULT_WIDTH=28;
-			public static final int VOLUME_DEFAULT_HEIGHT=45;
+			public static final int VOLUME_DEFAULT_HEIGHT=44;
 			public static final int SLIDER_DEFAULT_WIDTH=215;
 			
 			public static final int VOLUME_WIDTH=(int)(VOLUME_DEFAULT_WIDTH*Game.SCALE);

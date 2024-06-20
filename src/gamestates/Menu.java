@@ -64,6 +64,13 @@ public class Menu extends State implements Statemethods{
 	}
 	
 	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	@Override
 	public void mousePressed(MouseEvent e) {
 		for(MenuButton mb: buttons) {
 			if(IsInButton(e,mb))//check we are inside the button when we press
