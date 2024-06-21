@@ -1,5 +1,6 @@
 package gamestates;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -12,7 +13,7 @@ import utilz.LoadSave;
 public class Menu extends State implements Statemethods{
 	
 	private MenuButton[] buttons=new MenuButton[3];
-	private BufferedImage backgroundImg;
+	private BufferedImage backgroundImg, backgroundImgBg;
 	private int menuX,menuY,menuWidth,menuHeight;
 	
 	public Menu(Game game) {
@@ -22,19 +23,22 @@ public class Menu extends State implements Statemethods{
 	}
 
 	private void loadBackground() {
+		
+		backgroundImgBg=LoadSave.GetSpriteAtlas(LoadSave.MENU_BG_IMG);
+
 		backgroundImg=LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND);
 		menuWidth=(int)(backgroundImg.getWidth()*Game.SCALE);
 		menuHeight=(int)(backgroundImg.getHeight()*Game.SCALE);
 		menuX=Game.GAME_WIDTH/2 - menuWidth/2;
-		menuY=(int) (-45*Game.SCALE);//change to +45 if menu_background.jpg used
+		menuY=(int) (45*Game.SCALE);//change to +45 if menu_background.jpg used
 		
 		
 	}
 
 	private void loadButtons() {
-		buttons[0]=new MenuButton(Game.GAME_WIDTH/2,(int)(170*Game.SCALE),0,Gamestate.PLAYING);//150 is more centered
-		buttons[1]=new MenuButton(Game.GAME_WIDTH/2,(int)(240*Game.SCALE),1,Gamestate.OPTIONS);
-		buttons[2]=new MenuButton(Game.GAME_WIDTH/2,(int)(310*Game.SCALE),2,Gamestate.QUIT);
+		buttons[0]=new MenuButton(Game.GAME_WIDTH/2,(int)(150*Game.SCALE),0,Gamestate.PLAYING);//150 is more centered
+		buttons[1]=new MenuButton(Game.GAME_WIDTH/2,(int)(220*Game.SCALE),1,Gamestate.OPTIONS);
+		buttons[2]=new MenuButton(Game.GAME_WIDTH/2,(int)(290*Game.SCALE),2,Gamestate.QUIT);
 
 
 	}
@@ -49,6 +53,9 @@ public class Menu extends State implements Statemethods{
 	@Override
 	public void draw(Graphics g) {
 		
+		g.drawImage(backgroundImgBg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+		g.setColor(new Color(0, 0, 0,100)); //translucent bg
+		g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
 //		g.setColor(Color.black);
 //		g.drawString("Menu",Game.GAME_WIDTH/2, 200);
 		g.drawImage(backgroundImg, menuX, menuY, menuWidth, menuHeight, null);
