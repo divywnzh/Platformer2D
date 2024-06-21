@@ -1,5 +1,6 @@
 package gamestates;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -8,6 +9,7 @@ import entities.Player;
 import levels.LevelManager;
 import main.Game;
 import ui.PauseOverlay;
+import utilz.LoadSave;
 
 public class Playing extends State implements Statemethods{//playing scene
 	
@@ -15,6 +17,15 @@ public class Playing extends State implements Statemethods{//playing scene
 	private LevelManager levelManager;
 	private PauseOverlay pauseOverlay;
 	private boolean paused=false;
+	
+	private int xLvlOffset;
+	private int leftBorder=(int)(0.2*Game.GAME_WIDTH);//the line if the player is beyond we calculate if there is anything to move
+	private int rightBorder=(int)(0.8*Game.GAME_WIDTH);
+	
+	private int lvlTilesWide=LoadSave.getLevelData()[0].length; // we don't want to move bg any more than we have -> we don't want to show a blank scene
+	private int maxTilesOffset=lvlTilesWide-Game.TILES_IN_WIDTH; // remaining space 
+	private int maxLvlOffsetX=maxTilesOffset*Game.TILES_SIZE;
+	
 	
 	public Playing(Game game) {
 		super(game);
@@ -35,19 +46,40 @@ public class Playing extends State implements Statemethods{//playing scene
 		if(!paused) {
 			levelManager.update();
 			player.update();
+			checkCloseToBorder();
 		} else {
 			pauseOverlay.update();
 		}
 		
 	}
+	
+	private void checkCloseToBorder() {
+		
+		int playerX=(int)player.getHitbox().x;
+		int diff=playerX-xLvlOffset;
+		
+		if(diff>rightBorder)
+			xLvlOffset+=diff-rightBorder;
+		else if(diff<leftBorder)
+			xLvlOffset+=diff-leftBorder;
+		
+		if(xLvlOffset>maxLvlOffsetX)
+			xLvlOffset=maxLvlOffsetX;
+		else if(xLvlOffset<0)
+			xLvlOffset=0;
+		
+	}
 
 	@Override
 	public void draw(Graphics g) {
-		levelManager.draw(g);
-		player.render(g);	
+		levelManager.draw(g,xLvlOffset);
+		player.render(g,xLvlOffset);	
 		
-		if(paused)
-			pauseOverlay.draw(g);;
+		if(paused) {
+			g.setColor(new Color(0,0,0,150)); //translucent bg
+			g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
+			pauseOverlay.draw(g);
+		}
 	}
 
 	@Override
