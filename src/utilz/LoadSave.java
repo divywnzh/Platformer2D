@@ -14,13 +14,16 @@ public class LoadSave {// this class does not have any objects so we don't need 
 	
 	public static final String PLAYER_ATLAS="player_sprites.png";
 	public static final String LEVEL_ATLAS="outside_sprites.png";
-	public static final String LEVEL_ONE_DATA="level_one_data.png";
+//public static final String LEVEL_ONE_DATA="level_one_data.png";//
+	public static final String LEVEL_ONE_DATA="level_one_data_long.png";
+
 	public static final String MENU_BUTTONS="button_atlas.png";
-	public static final String MENU_BACKGROUND="plaftormer_menu_res.jpg"; //alternative to menu_background.png
+	public static final String MENU_BACKGROUND="menu_background.png"; //alternative to menu_background.png
 	public static final String PAUSE_BACKGROUND="pause_menu.png";
 	public static final String SOUND_BUTTONS="sound_button.png";
 	public static final String URM_BUTTONS="urm_buttons.png";
 	public static final String VOLUME_BUTTONS="volume_buttons.png";
+	public static final String MENU_BG_IMG="starter_bg.jpg";
 	
 	
 	public static final int TILE_SOLID = 0;
@@ -47,8 +50,10 @@ public class LoadSave {// this class does not have any objects so we don't need 
 		return img;
 	}
 	public static int[][] getLevelData(){
-		int[][] lvlData=new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH];
+		
 		BufferedImage img=GetSpriteAtlas(LEVEL_ONE_DATA);
+//		int[][] lvlData=new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH]; //for leve_one_data.png
+		int[][] lvlData=new int[img.getHeight()][img.getWidth()]; // leve_one_data_long.png
 		
 		for(int j=0;j<img.getHeight();j++) {
 			for(int i=0;i<img.getWidth();i++) {
