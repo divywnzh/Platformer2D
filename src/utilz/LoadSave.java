@@ -24,7 +24,9 @@ public class LoadSave {// this class does not have any objects so we don't need 
 	public static final String URM_BUTTONS="urm_buttons.png";
 	public static final String VOLUME_BUTTONS="volume_buttons.png";
 	public static final String MENU_BG_IMG="starter_bg.jpg";
-	
+	public static final String PLAYING_BG_IMG="playing_bg_img.png";
+	public static final String BIG_CLOUDS="big_clouds.png";
+	public static final String SMALL_CLOUDS="small_clouds.png";
 	
 	public static final int TILE_SOLID = 0;
 //	public static final int TILE_SPACE_PRESENT = 1;  
