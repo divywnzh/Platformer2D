@@ -54,7 +54,7 @@ public class Menu extends State implements Statemethods{
 	public void draw(Graphics g) {
 		
 		g.drawImage(backgroundImgBg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
-		g.setColor(new Color(0, 0, 0,100)); //translucent bg
+		g.setColor(new Color(100, 100, 100, 100)); //translucent bg
 		g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
 //		g.setColor(Color.black);
 //		g.drawString("Menu",Game.GAME_WIDTH/2, 200);

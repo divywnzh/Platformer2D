@@ -13,7 +13,7 @@ import utilz.LoadSave;
 public class Player extends Entity {
 	
 	private BufferedImage[][] animations; 
-	private int aniTick, aniIndex, aniSpeed=15; // 120/8 = 30 (8 animations per second)
+	private int aniTick, aniIndex, aniSpeed=25; // 120/8 = 30 (8 animations per second)
 	
 	private int playerAction=IDLE;
 	private boolean moving=false, attack=false;
@@ -48,7 +48,7 @@ public class Player extends Entity {
 	
 	public void render(Graphics g, int lvlOffset) {
 		g.drawImage(animations[playerAction][aniIndex], (int)(hitbox.x-xDrawOffset) - lvlOffset, (int)(hitbox.y-yDrawOffset), width, height, null);
-//		drawHitbox(g);
+		drawHitbox(g,lvlOffset);
 	}
 	
 

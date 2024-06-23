@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import entities.EnemyManager;
 import entities.Player;
 import levels.LevelManager;
 import main.Game;
@@ -18,6 +19,7 @@ public class Playing extends State implements Statemethods{//playing scene
 	
 	private Player player;
 	private LevelManager levelManager;
+	private EnemyManager enemyManager;
 	private PauseOverlay pauseOverlay;
 	private boolean paused=false;
 	
@@ -26,7 +28,8 @@ public class Playing extends State implements Statemethods{//playing scene
 	private int rightBorder=(int)(0.8*Game.GAME_WIDTH);
 	
 	private int lvlTilesWide=LoadSave.getLevelData()[0].length; // we don't want to move bg any more than we have -> we don't want to show a blank scene
-	private int maxTilesOffset=lvlTilesWide-Game.TILES_IN_WIDTH; // remaining space 
+	
+	private int maxTilesOffset=lvlTilesWide - Game.TILES_IN_WIDTH; // remaining space 
 	private int maxLvlOffsetX=maxTilesOffset*Game.TILES_SIZE;
 	
 	private BufferedImage backgroundImg, bigCloud, smallCloud;
@@ -49,7 +52,8 @@ public class Playing extends State implements Statemethods{//playing scene
 	
 	private void initClasses() {
 		levelManager=new LevelManager(game);
-		player = new Player(100, 100, (int)(64*Game.SCALE), (int)(40*Game.SCALE)); 
+		enemyManager=new EnemyManager(this);
+		player = new Player(200, 200, (int)(64*Game.SCALE), (int)(40*Game.SCALE)); 
 		player.loadlvlData(levelManager.getCurrentLevel().getLevelData());
 		
 		pauseOverlay = new PauseOverlay(this);
@@ -61,6 +65,7 @@ public class Playing extends State implements Statemethods{//playing scene
 		if(!paused) {
 			levelManager.update();
 			player.update();
+			enemyManager.update(levelManager.getCurrentLevel().getLevelData(), player);
 			checkCloseToBorder();
 		} else {
 			pauseOverlay.update();
@@ -93,7 +98,8 @@ public class Playing extends State implements Statemethods{//playing scene
 		drawClouds(g);
 		
 		levelManager.draw(g,xLvlOffset);
-		player.render(g,xLvlOffset);	
+		player.render(g,xLvlOffset);
+		enemyManager.draw(g, xLvlOffset);
 		
 		if(paused) {
 			g.setColor(new Color(0,0,0,150)); //translucent bg

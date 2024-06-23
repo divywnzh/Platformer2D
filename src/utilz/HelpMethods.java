@@ -1,6 +1,7 @@
 package utilz;
 
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Float;
 
 import main.Game;
 
@@ -32,13 +33,16 @@ public class HelpMethods {
 		float xIndex=x/Game.TILES_SIZE;
 		float yIndex=y/Game.TILES_SIZE;
 		
-		int value=lvlData[(int)yIndex][(int)xIndex];
+		return IsTileSolid((int)xIndex, (int)yIndex, lvlData);
+	}
+	
+	public static boolean IsTileSolid(int xTile, int yTile, int[][] lvlData) {
+		int value=lvlData[(int)yTile][(int)xTile];
 		
 		if(value  == LoadSave.TILE_SOLID || value<0 || value!=11) 
 			return true; //IsSolid  ✅ 
 		
 		return false;
-		
 	}
 	
 	public static float GetEntityXPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {
@@ -58,7 +62,7 @@ public class HelpMethods {
 		int currentTile=(int)(hitbox.y/Game.TILES_SIZE);
 		
 		int tileYPos=currentTile*Game.TILES_SIZE;
-		int yOffset=(int)(Game.TILES_SIZE-hitbox.height);
+		int yOffset=(int)(Game.TILES_SIZE - hitbox.height);
 		
 		if(airSpeed>0){//Falling - Touching Floor
 			return tileYPos+yOffset-1;
@@ -73,5 +77,30 @@ public class HelpMethods {
 				return false;
 		return true;
 	}
+	
+	public static boolean IsFloor(Rectangle2D.Float hitbox, float xSpeed, int[][] lvlData) {
+		return IsSolid(hitbox.x+xSpeed, hitbox.y+hitbox.height+1, lvlData);
+	}
+	
+	public static boolean IsAllTilesWalkable(int xEnemyTile, int xPlayeTile, int y, int[][] lvlData) {
+	    
+		int xStart = Math.min(xEnemyTile, xPlayeTile);
+	    int xEnd = Math.max(xEnemyTile, xPlayeTile);
+	    
+	    for (int i = xStart; i <= xEnd; i++) {
+	        if (IsTileSolid(i, y, lvlData)) {
+	            return false;
+	        }
+	    }
+	    return true;
+	}
+	
+	public static boolean IsSightClear(int[][] lvlData, Rectangle2D.Float EnemyHitbox, Rectangle2D.Float PlayeHitbox, int yTile) {
+	    int EnemyXTile = (int) (EnemyHitbox.x / Game.TILES_SIZE);
+	    int PlayerXTile = (int) (PlayeHitbox.x / Game.TILES_SIZE);
+
+	    return IsAllTilesWalkable(EnemyXTile, PlayerXTile, yTile, lvlData);
+	}
+
 
 }
