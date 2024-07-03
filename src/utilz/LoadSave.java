@@ -31,6 +31,7 @@ public class LoadSave {// this class does not have any objects so we don't need 
 	public static final String BIG_CLOUDS="big_clouds.png";
 	public static final String SMALL_CLOUDS="small_clouds.png";
 	public static final String CRABBY_SPRITE="crabby_sprite.png";
+	public static final String STATUS_BAR="health_power_bar.png";
 	
 	public static final int TILE_SOLID = 0;
 //	public static final int TILE_SPACE_PRESENT = 1;  

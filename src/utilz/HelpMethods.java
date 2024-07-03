@@ -79,7 +79,10 @@ public class HelpMethods {
 	}
 	
 	public static boolean IsFloor(Rectangle2D.Float hitbox, float xSpeed, int[][] lvlData) {
-		return IsSolid(hitbox.x+xSpeed, hitbox.y+hitbox.height+1, lvlData);
+		float adjust=xSpeed;
+		if(xSpeed>0)//if going to the right
+			adjust=xSpeed+hitbox.width;
+		return IsSolid(hitbox.x+adjust, hitbox.y+hitbox.height+1, lvlData);
 	}
 	
 	public static boolean IsAllTilesWalkable(int xEnemyTile, int xPlayeTile, int y, int[][] lvlData) {
@@ -87,9 +90,12 @@ public class HelpMethods {
 		int xStart = Math.min(xEnemyTile, xPlayeTile);
 	    int xEnd = Math.max(xEnemyTile, xPlayeTile);
 	    
-	    for (int i = xStart; i <= xEnd; i++) {
-	        if (IsTileSolid(i, y, lvlData)) {
+	    for (int i=xStart; i<=xEnd; i++) {
+	        if(IsTileSolid(i, y, lvlData)) {
 	            return false;
+	        }
+	        if(!IsTileSolid(i, y+1, lvlData)) {
+	        	return false;
 	        }
 	    }
 	    return true;

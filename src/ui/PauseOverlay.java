@@ -134,7 +134,9 @@ public class PauseOverlay {
 				playing.unpauseGame();
 		}else if (isInButton(e,replayB)) {
 			if(replayB.isMousePressed())
-				System.out.println(" replay level ");
+				//System.out.println(" replay level ");
+				playing.resetAll();
+				playing.unpauseGame();
 		}else if (isInButton(e,unpauseB)) {
 			if(unpauseB.isMousePressed())
 //				Gamestate.state=Gamestate.PLAYING; // not this we also would like to update the pause/unpaused status in the playing class 

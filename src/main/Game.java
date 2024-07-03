@@ -32,6 +32,7 @@ public class Game implements Runnable{
 		
 		gamePanel=new GamePanel(this); //initClasses above gamePanel as gamePanel has a method game.render() which has player inside and needs to be initiallized 
 		gameWindow=new GameWindow(gamePanel);	
+		gamePanel.setFocusable(true);
 		gamePanel.requestFocus();
 		
 		startGameLoop();
