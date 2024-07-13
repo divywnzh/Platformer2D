@@ -37,6 +37,9 @@ public class LoadSave {// this class does not have any objects so we don't need 
 	public static final String STATUS_BAR="health_power_bar.png";
 	public static final String COMPLETED_IMG="completed_sprite.png";
 	public static final String DEATH_SCREEEN="death_screen.png";
+	
+	public static final String OPTIONS_MENU="options_background.png";
+
 
 	//Objects
 	public static final String POTION_ATLAS="potions_sprites.png";
