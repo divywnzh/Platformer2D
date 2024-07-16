@@ -36,10 +36,6 @@ public class Playing extends State implements Statemethods{//playing scene
 	private int leftBorder=(int)(0.2*Game.GAME_WIDTH);//the line if the player is beyond we calculate if there is anything to move
 	private int rightBorder=(int)(0.8*Game.GAME_WIDTH);
 	
-//	private int lvlTilesWide=LoadSave.getLevelData()[0].length; // we don't want to move bg any more than we have -> we don't want to show a blank scene
-//	
-//	private int maxTilesOffset=lvlTilesWide - Game.TILES_IN_WIDTH; // remaining space 
-//	private int maxLvlOffsetX=maxTilesOffset*Game.TILES_SIZE;
 	private int maxLvlOffsetX; //calculated in Level class now
 	
 	private BufferedImage backgroundImg, bigCloud, smallCloud;
