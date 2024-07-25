@@ -42,7 +42,7 @@ The core of the game's design revolves around the interaction of well-structured
     - Position management (x, y coordinates)
     - Movement capabilities
     - Collision detection and response
-- **Inheritance & Polymorphism:** The power of OOP shines through the use of inheritance. Specialized classes like `Player` and `Enemy` inherit from the `Entity` class. This means they:
+- **Inheritance & Polymorphism:** Specialized classes like `Player` and `Enemy` inherit from the `Entity` class. This means they:
     - Share common functionalities (position, movement, collision)
     - Override or extend methods to implement unique behaviors (player controls, enemy AI)
 - **Encapsulation:** Each class is responsible for its own data and logic. This encapsulation promotes:
