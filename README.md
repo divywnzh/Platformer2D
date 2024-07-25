@@ -4,7 +4,7 @@
 Platformer 2D is an exciting Java-based 2D platformer game that combines classic gameplay mechanics with modern design principles. With multiple levels, enemies, and smooth controls for player movements and action. The project has tried to follow object-oriented programming practices to its best.
 
 
-<img src="https://i.imgur.com/i516Pch.png" alt="okay" width="500" height="250"><img src="https://i.imgur.com/2QCox1F.png" alt="okay" width="500" height="250">
+<img src="https://i.imgur.com/i516Pch.png" alt="okay" width="300" height="150"><img src="https://i.imgur.com/2QCox1F.png" alt="okay" width="300" height="150">
 
 ### Note
 Modular nature of codebase makes it easy to maintain and extend. You may clone and add your own functionalities.
@@ -22,7 +22,7 @@ Modular nature of codebase makes it easy to maintain and extend. You may clone a
 - **Audio Management:** To be added
 
 
-<img src="https://i.imgur.com/Wl41Eao.png" alt="okay" width="500" height="250"><img src="https://i.imgur.com/qaypHAv.png" alt="okay" width="500" height="250">
+<img src="https://i.imgur.com/Wl41Eao.png" alt="okay" width="300" height="150"><img src="https://i.imgur.com/qaypHAv.png" alt="okay" width="300" height="150">
 
 
 
