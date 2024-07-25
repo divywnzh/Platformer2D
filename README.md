@@ -3,8 +3,12 @@
 ## Description
 Platformer 2D is an exciting Java-based 2D platformer game that combines classic gameplay mechanics with modern design principles. With multiple levels, enemies, and smooth controls for player movements and action. The project has tried to follow object-oriented programming practices to its best.
 
+
+<img src="https://i.imgur.com/i516Pch.png" alt="okay" width="500" height="250"><img src="https://i.imgur.com/2QCox1F.png" alt="okay" width="500" height="250">
+
 ### Note
 Modular nature of codebase makes it easy to maintain and extend. You may clone and add your own functionalities.
+
 
 ## Features
 - **Engaging Gameplay:** Smooth running, jumping, and attacking mechanics
@@ -17,6 +21,12 @@ Modular nature of codebase makes it easy to maintain and extend. You may clone a
 - **Save System:** Save and load your game progress
 - **Audio Management:** To be added
 
+
+<img src="https://i.imgur.com/Wl41Eao.png" alt="okay" width="500" height="250"><img src="https://i.imgur.com/qaypHAv.png" alt="okay" width="500" height="250">
+
+
+
+## Used
 
 - **Tech Stack:** Java,  Java AWT and Swing for rendering
 - **Resource Management:** Efficient sprite atlas and level data loading
@@ -58,22 +68,21 @@ The core of the game's design revolves around the interaction of well-structured
 ## Installation
 
 ### Prerequisites
-- Java Development Kit (JDK) 11 or higher
-- Git (optional, for cloning the repository)
+- Java Development Kit (JDK) 17 or higher
+- Git (optional for cloning the repository)
 
 ### Steps
-1. Clone the repository (or download the ZIP file):
-git clone https://github.com/yourusername/Platformer2D.git
-Copy
+1. Clone the repository (or download the ZIP file): git clone https://github.com/yourusername/Platformer2D.git
+
 2. Navigate to the project directory:
 cd Platformer2D
-Copy
+
 3. Compile the Java files:
 javac -d bin src/**/*.java
-Copy
+   
 4. Run the game:
 java -cp bin main.MainClass
-Copy
+   
 
 Alternatively, if you're using an IDE like Eclipse or IntelliJ IDEA:
 
